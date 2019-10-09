@@ -1,35 +1,27 @@
 <?php
-
-
-
-//Route::get('/{tennguoidung}', function ($tennguoidung = "") {
- //   return view('welcome');
-//});
-
-// use App/Models/User;
-// Route::get('/', function (){
-// return view('long')	
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+use Faker\Generator as Faker;
+use Illuminate\Http\Request;
+// Route::get('/', function () {
+//     return view('welcome');
 // });
-
-Route::get('long', function (){
-$users = factory(App\Models\User::class, 10)
-->make()
-->toArray();
-
-return view('long', [
- 'users' => $users
-
-]);
+// route for user
+Route::group(['prefix' => 'users','as' =>'users.',],function(){
+    Route::get('/', 'UserController@index')->name('index');
+    Route::view('/create' , 'users/create')->name('create');
+    Route::post('/store', 'UserController@store')->name('store');
+    Route::get('/edit/{id}','UserController@edit');
+    Route::post('/update', 'UserController@update')->name('update');
+    Route::post('/destroy/{id}','UserController@destroy')->name('destroy');
 });
-  
-
-Route::get('post', function (){
-$posts = factory(App\Models\Post::class, 10)
-->make()
-->toArray();
-return view('post', [
- 'posts' => $posts
-
-]);
+Route::group(['prefix' => 'posts','as' =>'posts.',],function(){
 });
-  

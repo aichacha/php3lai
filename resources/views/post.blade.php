@@ -1,12 +1,14 @@
 @extends('layouts')
 
+<!-- 1//////////////////////////// -->
 @section('title')
-
-long đại ca
-
+post
 @endsection
+<!-- 1//////////////////////////// -->
 
-@section('contens')
+
+@section('contents')
+<!-- code -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -23,43 +25,28 @@ long đại ca
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+@if(empty($posts))
+<p>No Data</p>
+@else
+<table class="table">
+  <thead>
+    <th>User ID</th>
+    <th>Content</th>
+    <th>User name</th>
+  </thead>
+  <tbody>
+    @foreach($posts as $post)
+    <tr>      
+      <td>{{ $post['user_id'] }}</td>
+      <td>{{ $post['content'] }}</td>
+      <td>{{ $post['user']['name'] }}</td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+@endif
 
     </section>
     <!-- /.content -->
-
-
-
-
-    @if(empty($posts))
-    <p>ko du lieu</p>
-
-
-    @else
-      <table class="table">
-        <thead>
-       
-        <th>content</th>
-        </thead>
-
-        <tbody>
-          @foreach($posts as $posts)
-          <tr>
-            
-            <td>{{ $posts['content'] }}</td>
-
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-
-    @endif
-
-
-
-
-
   </div>
 @endsection
